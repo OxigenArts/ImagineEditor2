@@ -16,12 +16,20 @@ class EditorBridge {
 
     attachEvents() {
         this.attachSelectionEvent();
+        this.attachContextEvents();
+    }
+
+    getFrame() {
+        return this.editorFrame.$iframe;
+    }
+
+    getBodyElements() {
+        return this.getFrame().contents().find("body *");
     }
 
 
     attachSelectionEvent() {
-        let frame = this.editorFrame.$iframe;
-        let bodyElements = frame.contents().find("body *");
+        let bodyElements = this.getBodyElements();
         let self = this;
         bodyElements.click(function(e) {
             e.stopPropagation();
@@ -34,6 +42,10 @@ class EditorBridge {
             self.selectElement($(this).parent());
             console.log(self.selectedElement);
         })
+    }
+
+    async attachContextEvents() {
+        
     }
 
 

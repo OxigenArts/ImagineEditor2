@@ -64,9 +64,10 @@ class FrameEditor {
     async prepareBody() {
         let body = await this.getBody();
         let self = this;
-        body.sortable({
-            connectWith: '.connected'
+        let sortable = Sortable.create(body[0], {
+            group: 'elements'
         });
+        
         this.bridge.attachEvents();
         this.attachHighlightEvent();
     }
@@ -83,8 +84,10 @@ class FrameEditor {
     async appendHtml(html) {
         let body = await this.getBody();
         let el = $(html);
-        el.addClass("connected");
-        el.find("*").addClass("connected");
+        el.addClass('el');
+        Sortable.create(el[0], {
+            group:'elements'
+        });
         body.append(el);
         this.prepareBody();
     }

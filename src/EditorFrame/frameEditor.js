@@ -64,7 +64,9 @@ class FrameEditor {
     async prepareBody() {
         let body = await this.getBody();
         let self = this;
-        body.sortable();
+        body.sortable({
+            connectWith: '.connected'
+        });
         this.bridge.attachEvents();
         this.attachHighlightEvent();
     }
@@ -80,7 +82,10 @@ class FrameEditor {
     //Metodo para agregar HTML al frame.
     async appendHtml(html) {
         let body = await this.getBody();
-        body.append(html);
+        let el = $(html);
+        el.addClass("connected");
+        el.find("*").addClass("connected");
+        body.append(el);
         this.prepareBody();
     }
 

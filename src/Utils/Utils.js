@@ -25,6 +25,10 @@ class Utils {
         console.log(arr);
         return arr.filter(obj => obj[key] == search)[0];
     }
+
+    removeSortable(el) {
+        
+    }
 }
 
 export {Utils as default}

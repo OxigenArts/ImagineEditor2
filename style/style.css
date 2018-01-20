@@ -8,6 +8,16 @@ html, body {
     overflow-y: scroll;
 }
 
+#elementEditor {
+
+    position:fixed !important;
+    z-index: 999;
+    display: block !important;
+    border-radius: 5px;
+}
+
+
+
 
 div.row, div.container-fluid {
     height: 100%;

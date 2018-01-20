@@ -1,13 +1,17 @@
+import EditorUI from '../EditorUI/editorUI';
+
 class EditorBridge {
 
     constructor(frame) {
         this.editorFrame = frame;
         this.selectedElement = undefined;
+        this.editorUI = new EditorUI(this.editorFrame);
         this.attachEvents();
     }
 
     selectElement(el) {
         this.selectedElement = el;
+        this.editorUI.syncWithElementEditor(this.selectedElement);
     }
 
     attachEvents() {

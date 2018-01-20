@@ -36,6 +36,8 @@ class FrameEditor {
         this.prepareHead();
     }
 
+
+    //Añadir eventos de hightlight de cada elemento
     attachHighlightEvent() {
         if (this.markElements) {
             let self = this.$iframe;
@@ -44,11 +46,12 @@ class FrameEditor {
                 var eleft = $(e.target).offset().left -  self.contents().scrollLeft()+ self.offset().left;
                 var ewidth = $(e.target).outerWidth();
                 var eheight = $(e.target).outerHeight();
-
-		        $("body").append('<div style="top:'+etop+'px;left:'+eleft+'px;width:'+ewidth+'px;height:'+eheight+'px;" class="selector"></div>')
-		    	e.stopPropagation();
+                let box = $('<div style="top:'+etop+'px;left:'+eleft+'px;width:'+ewidth+'px;height:'+eheight+'px;" class="selector"></div>');
+                $("body").append(box);
+                box.hide().fadeIn(100);
+                e.stopPropagation();
             }).mouseleave(function(){
-                $('.selector').remove();
+                $('.selector').fadeOut(100).remove();
             });
 
 

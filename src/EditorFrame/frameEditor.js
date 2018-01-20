@@ -36,22 +36,41 @@ class FrameEditor {
         this.prepareHead();
     }
 
+    attachHighlightEvent() {
+        if (this.markElements) {
+            let self = this.$iframe;
+            this.$iframe.contents().find('body *').mouseenter(function(e){
+                var etop = $(e.target).offset().top - self.contents().scrollTop()+ self.offset().top;
+                var eleft = $(e.target).offset().left -  self.contents().scrollLeft()+ self.offset().left;
+                var ewidth = $(e.target).outerWidth();
+                var eheight = $(e.target).outerHeight();
+
+		        $("body").append('<div style="top:'+etop+'px;left:'+eleft+'px;width:'+ewidth+'px;height:'+eheight+'px;" class="selector"></div>')
+		    	e.stopPropagation();
+            }).mouseleave(function(){
+                $('.selector').remove();
+            });
+
+
+            
+        }
+    }
+
 
     //Preparacion del body
     async prepareBody() {
         let body = await this.getBody();
         let self = this;
         body.sortable();
-        this.addMark(body.children());
         this.bridge.attachEvents();
+        this.attachHighlightEvent();
     }
 
     //Preparacion del Head
     async prepareHead() {
         let head = await this.getHead();
         let self = this;
-
-        head.append("<link rel='stylesheet' href='style/editorFrame.css'>")
+        
     }
 
 
@@ -62,15 +81,6 @@ class FrameEditor {
         this.prepareBody();
     }
 
-
-    addMark(el) {
-        
-        $(el).hover(function(){
-            $(this).addClass('selector')
-            }, function(){
-            $(this).removeClass('selector');
-        });
-    }
 
 }
 

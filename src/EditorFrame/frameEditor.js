@@ -38,6 +38,7 @@ class FrameEditor {
     async prepareBody() {
         let body = await this.getBody();
         let self = this;
+        body.sortable();
         this.addMark(body.children());
     }
 

@@ -1,3 +1,5 @@
+import EditorBridge from '../EditorBridge/editorBridge';
+
 class FrameEditor {
     
     
@@ -6,6 +8,7 @@ class FrameEditor {
     constructor(id) {
         this.markElements = true;
         this.$iframe = $(id);
+        this.bridge = new EditorBridge(this);
         this.prepareDOM();
     }
 
@@ -40,6 +43,7 @@ class FrameEditor {
         let self = this;
         body.sortable();
         this.addMark(body.children());
+        this.bridge.attachEvents();
     }
 
     //Preparacion del Head

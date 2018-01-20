@@ -1,5 +1,6 @@
 import EditorControls from './EditorControls/editorControls';
 import EditorFrame from './EditorFrame/frameEditor';
+
 class EditorCore {
     constructor(id) {
         this.id = id;

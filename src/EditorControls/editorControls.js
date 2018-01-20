@@ -12,8 +12,7 @@ class EditorControls {
         $('[data-control-add-element]').click(function( event )  {
 
             let element = $(this).data('control-add-element');
-            
-            console.log($(this));
+
 
             $.get({
                 url: `templates/elements/${element}.html`,

@@ -1,10 +1,16 @@
-
+import Utils from '../Utils/Utils';
 
 class EditorControls {
 
     constructor(editorFrame) {
        this.editorFrame = editorFrame;
-       this.fetchElementsEvents();
+       this.utils = new Utils();
+       this.attachEvents();
+    }
+
+    attachEvents() {
+        this.fetchElementsEvents();
+        this.fetchSelectionEvents();
     }
 
     fetchElementsEvents() {
@@ -23,6 +29,18 @@ class EditorControls {
                     self.editorFrame.appendHtml(res);
                 }
             })
+        })
+    }
+
+    fetchSelectionEvents() {
+        let self = this;
+        $('[data-control-selected-element]').change(function( event ) {
+            
+            let selectedElement = $(self.editorFrame.bridge.selectedElement);
+            let propName = $(this).data('control-selected-element');
+            selectedElement.attr(propName, $(this).val());
+            console.log(selectedElement, propName, $(this).val());
+            console.log("Changed");
         })
     }
 }

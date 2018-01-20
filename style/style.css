@@ -61,3 +61,18 @@ div.row, div.container-fluid {
     border-radius:2px;
     pointer-events: none;
 }
+
+.contextMenu {
+    position: fixed;
+    background: rgba(99, 99, 99, 0.651);
+    opacity: 0.9;
+    border-radius: 5px;
+    
+}
+
+.contextMenuItem {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 5px;
+}

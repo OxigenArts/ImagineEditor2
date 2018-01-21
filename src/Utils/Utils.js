@@ -1,8 +1,16 @@
+/*
+    Clase Utils
+    Descripcion: Contiene métodos que facilitan la utilizacion de todo el sistema. 
+    Creado especialmente para no tener que repetir codigo en ciertas ocasiones.
+    Esquema DRY.
+*/
+
 class Utils {
     constructor() {
 
     }
 
+    //Metodo que funciona para obtener los atributos de un elemento jQuery.
     getAttributes(el) {
         return new Promise(resolve => {
             let attributes = [];
@@ -21,14 +29,12 @@ class Utils {
         
     }
 
+    //Metodo para obtener un elemento de un array de objetos teniendo el nombre de un parametro.
     getElementInObjectArray(key, search, arr) {
         console.log(arr);
         return arr.filter(obj => obj[key] == search)[0];
     }
 
-    removeSortable(el) {
-        
-    }
 }
 
 export {Utils as default}

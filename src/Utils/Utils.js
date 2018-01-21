@@ -31,7 +31,6 @@ class Utils {
 
     //Metodo para obtener un elemento de un array de objetos teniendo el nombre de un parametro.
     getElementInObjectArray(key, search, arr) {
-        console.log(arr);
         return arr.filter(obj => obj[key] == search)[0];
     }
 

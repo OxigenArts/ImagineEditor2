@@ -19,8 +19,10 @@ class FrameEditor {
     
     //Constructor del frame del editor
     //Al preparar, inicializa el frame y lo adapta al objeto.
-    constructor(id) {
+    constructor(id, core) {
 
+
+        this.core = core;
         //Variable MarkElements: Funciona para activar o desactivar el Element Highlight
         //Element Highlight: Recuadro azul que se coloca sobre cada elemento.
         this.markElements = true;
@@ -36,7 +38,7 @@ class FrameEditor {
         La propiedad que almacena la instancia de EditorBridge es FrameEditor.bridge, como puede observarse
         aquí abajo.
         */
-        this.bridge = new EditorBridge(this);
+        this.bridge = new EditorBridge(this, this.core);
 
         /*
         La funcion prepareDOM agrupa las funciones:

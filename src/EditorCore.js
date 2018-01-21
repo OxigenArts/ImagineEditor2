@@ -32,7 +32,7 @@ class EditorCore {
         if (this.preload) this.preload();
 
         //EditorCore.frame -> Frame del editor (Ver EditorFrame/editorFrame.js para mas informacion)
-        this.frame = new EditorFrame(this.id);
+        this.frame = new EditorFrame(this.id, this);
 
         //EditorCore.controls -> Controles del editor (Ver EditorControls/editorControls.js para mas informacion)
         this.controls = new EditorControls(this.frame);

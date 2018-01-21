@@ -1,5 +1,5 @@
 import Utils from '../Utils/Utils';
-
+import TemplateManager from '../TemplateManager/templateManager';
 /*
     Clase EditorControls
     Descripcion: Encargada de crear y configurar los controles del editor.
@@ -12,6 +12,7 @@ class EditorControls {
        //Guardamos la instancia
        this.editorFrame = editorFrame;
        this.utils = new Utils();
+       this.templateManager = new TemplateManager();
        this.attachEvents();
     }
 
@@ -38,16 +39,12 @@ class EditorControls {
             let element = $(this).data('control-add-element');
 
             //Obtenemos el template del elemento seleccionado en la carpeta templates/elements/...
-            $.get({
-                url: `templates/elements/${element}.html`,
-                dataType: "html",
-                success: (res) => {
-                    console.log(res);
-                    console.log(self);
-                    //Agregamos al iframe del editor el template que obtuvimos.
-                    self.editorFrame.appendHtml(res);
-                }
+            self.templateManager.getElement(element).then((el) => {
+                self.editorFrame.appendHtml(el);
             })
+
+            //Agregamos al iframe del editor el template que obtuvimos.
+            
         })
     }
 
@@ -69,10 +66,21 @@ class EditorControls {
                     <input data-control-selected-element="class">
                     //Esto cambiará la propiedad class, y se guardará en la variable PropName.
             */
-            let propName = $(this).data('control-selected-element');
+            let propName = $(this).attr('id');
 
+            let value = $(this).val();
+
+            let role = $(this).data('role');
+            
+            let filteredValue = value;
+            
+            if (self.templateManager.pluginFilters[role]) filteredValue = self.templateManager.pluginFilters[role](value);
+            
+            
+            console.log(filteredValue);
             //Se modifica la propiedad mediante jQuery, obteniendo el nuevo valor.
-            selectedElement.attr(propName, $(this).val());
+            selectedElement.attr(propName, filteredValue);
+
 
             //Debug
             console.log(selectedElement, propName, $(this).val());

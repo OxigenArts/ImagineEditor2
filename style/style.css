@@ -76,3 +76,14 @@ div.row, div.container-fluid {
     text-align: center;
     padding: 5px;
 }
+
+.tag {
+    background-color: #0055FF;
+    border-radius: 5px;
+    color: white;
+    padding: 2px;
+}
+
+.tag .remove {
+    color: white;
+}

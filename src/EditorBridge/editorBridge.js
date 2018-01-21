@@ -8,7 +8,9 @@ import EditorUI from '../EditorUI/editorUI';
 class EditorBridge {
 
     //El constructor pide una referencia al EditorFrame para posterior utilizacion.
-    constructor(frame) {
+    constructor(frame, core) {
+
+        this.core = core;
 
         //Guardamos una referencia del EditorFrame.
         this.editorFrame = frame;
@@ -19,7 +21,7 @@ class EditorBridge {
         this.selectedElement = undefined;
 
         //Instancia de la clase EditorUI para modificar la UI mediante el puente (EditorBridge o this).
-        this.editorUI = new EditorUI(this.editorFrame);
+        this.editorUI = new EditorUI(this.editorFrame, this.core);
 
         //Elementos del menu de contexto (Menu que se abre cuando le damos click derecho)
         this.contextElements = [

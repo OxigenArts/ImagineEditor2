@@ -1,5 +1,6 @@
 //Import del Core del editor
 import EditorCore from './src/EditorCore';
+import FileSystem from './src/FileSystem/FileSystem';
 
 //El editor del core inicializa todos los componentes del editor
 
@@ -14,6 +15,4 @@ editor.setPreloadMethod(function() {
 //La el metodo init() funciona para iniciar el editor y activar sus componentes.
 editor.init();
 
-
-
-
+window.fileSystem = new FileSystem();

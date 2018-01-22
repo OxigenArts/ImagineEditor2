@@ -13,7 +13,9 @@ class TemplateManager {
 
         this.pluginCallbacks = {
             'taggedinput': function(el) {
-                $(el).tagsinput();
+                $(el).tagsinput({
+                    tagClass: "btn btn-primary"
+                });
             }
         }
 

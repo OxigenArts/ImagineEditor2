@@ -17,6 +17,7 @@
     "babel-runtime": "^6.26.0",
     "bootstrap": "^4.0.0",
     "jquery-contextmenu": "^3.0.0-beta.1",
+    "jszip": "^3.1.5",
     "ui-contextmenu": "^1.18.1",
     "webpack": "^3.10.0"
   },

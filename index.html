@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/bootstrap.min.css">
     <link rel="stylesheet" href="style/bootstrap-tagsinput.css">
+    
     <title>Imagine Editor</title>
 </head>
 
@@ -25,13 +26,16 @@
                         </div>
                         <div class="modal-body">
                             <div class="form">
-                                
-                                
+                                <input type="text" id="carpeta" placeholder="Nueva Carpeta">
+                                <button type="button" class="btn btn-primary" onclick="crearCarpeta()">crear carpeta</button>
+                                <input type="text" id="archivo" placeholder="Nueva Archivo">
+                                <button type="button" class="btn btn-primary" onclick="crearArchivo()">crear Archivo</button>
                             </div>    
                         </div>
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        
+                        
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="zip()">Generar Zip</button>
                         </div>
                     </div>
                     </div>
@@ -64,6 +68,9 @@
     <script src="script/bootstrap.min.js"></script>
     <script src="script/bootstrap-tagsinput.min.js"></script>
     <script src="app.js"></script>
+    <script src="node_modules/jszip/dist/jszip.min.js"></script>
+    <script src="node_modules/jszip/vendor/FileSaver.js"></script>
+    <script src="src/FileElement/FileElement.js"></script>
 </body>
 
 </html>

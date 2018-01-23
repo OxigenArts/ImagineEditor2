@@ -1,5 +1,61 @@
-<div style="display: flex; flex-direction: row; padding: 20px;">
-    <div style="padding: 20px;" >Hola</div>
-    <div style="padding: 20px;">Hola 2</div>
-    <div style="padding: 20px;">Hola 3</div>
+
+<div id="element">
+    <div id="elementHtml">
+      
+       <div container>
+          
+           <div mainframe>
+               <div style="padding: 20px;" >Hola</div>
+                <div style="padding: 20px;">Hola 2</div>
+                <div style="padding: 20px;">Hola 3</div>
+           </div>
+            
+       </div>
+        
+    </div>
+    
+    <pre id="elementConfig">
+        
+        {
+            "properties" :  
+            [ 
+                { 
+                    "selector": "[mainframe]",
+                    "title" : "Prueba", 
+                    "name" : "test", 
+                    "default" : "miValor",
+                    "template": "input"
+                }
+            ],
+            "styles": [
+                {
+                    "selector": "[mainframe]",
+                    "rules": [
+                        {
+                            "title": "Display",
+                            "name": "display",
+                            "default": "flex" ,
+                            "template": "input"
+                        },
+                        {
+                            "title": "Direccion del flex",
+                            "name": "flex-direction",
+                            "default": "row",
+                            "template": "input"
+                        },
+                        {
+                            "title": "Padding del contenedor",
+                            "name": "padding",
+                            "default": "20px",
+                            "template": "input"
+                        }
+                    ]
+                }
+            ]
+        }
+
+    </pre>
+    
 </div>
+
+

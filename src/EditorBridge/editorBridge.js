@@ -19,7 +19,12 @@ class EditorBridge {
         //Establecemos como indefinida la propiedad selectedElement, ya que al principio no hay ningun
         //elemento seleccionado.
         this.selectedElement = undefined;
-
+        
+        
+        //Variable selectedElementConfig: Contiene la configuracion del elemento seleccionado.
+        //Aquí se especifican cuales son las propiedades especificas del elemento y que aparecerán en el editor.
+        this.selectedElementConfig = undefined;
+        
         //Instancia de la clase EditorUI para modificar la UI mediante el puente (EditorBridge o this).
         this.editorUI = new EditorUI(this.editorFrame, this.core);
 
@@ -40,7 +45,7 @@ class EditorBridge {
     //Funcion para establecer un elemento como seleccionado.
     selectElement(el) {
         this.selectedElement = el;
-        this.editorUI.syncWithElementEditor(this.selectedElement);
+        this.editorUI.syncWithElementEditor(this.selectedElement, this.selectedElementConfig);
     }
 
     //Funcion para inicializar los eventos del puente.

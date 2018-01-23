@@ -39,7 +39,11 @@ class EditorControls {
             let element = $(this).data('control-add-element');
 
             //Obtenemos el template del elemento seleccionado en la carpeta templates/elements/...
-            self.templateManager.getElement(element).then((el) => {
+            self.templateManager.getElement(element).then((element) => {
+                
+                let el = self.templateManager.processElement(element.el, element.config);
+                
+                
                 self.editorFrame.appendHtml(el);
             })
 
@@ -78,8 +82,17 @@ class EditorControls {
             
             
             console.log(filteredValue);
+            
             //Se modifica la propiedad mediante jQuery, obteniendo el nuevo valor.
-            selectedElement.attr(propName, filteredValue);
+            if (propName == 'style') {
+                let selector = $(this).attr('selector');
+                let modifies = $(this).attr('modifies');
+                selectedElement.find(selector).css(modifies, filteredValue);
+            } else {
+                selectedElement.attr(propName, filteredValue);
+            }
+            
+            
 
 
             //Debug

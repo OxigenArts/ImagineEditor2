@@ -63,19 +63,11 @@ class EditorUI {
         ]
 
     }
-
-    //Metodo encargado de sincronizar un elemento con el editor de elementos.
-    //Pide como parametro la instancia del elemento.
-    async syncWithElementEditor(el) {
-        
-        //Obtenemos los atributos del elemento pasado como parametro.
+    
+    //Obtiene los campos generales del elemento seleccionado
+    async getFieldsElementEditor(el) {
         let attrs = await this.utils.getAttributes(el);
-
-        //Variable donde se guardarán los nuevos fields
         let newFields = [];
-        
-
-        //Agregamos los campos al editor de elementos
         for(let a = 0; a <= this.elementEditorFields.length; a++) {
             let field = this.elementEditorFields[a];
             if (!field) continue;
@@ -88,7 +80,7 @@ class EditorUI {
 
             let attr = this.utils.getElementInObjectArray('name', field.id, attrs);
 
-            if (attr) instance.find(".control").val(attr.value.split(" ").join(","));
+            if (attr && field.template == "taggedinput") instance.find(".control").val(attr.value.split(" ").join(","));
 
             this.templateManager.applyPlugins(instance.find(".control"), field.template);
 
@@ -97,6 +89,89 @@ class EditorUI {
             
             newFields.push(instance);
         }
+        
+        return newFields;
+    }
+    
+    //Obtiene los campos de configuracion del elemento seleccionado
+    async getFieldsConfigElementEditor(config, el) {
+        let newFields = []
+        if (config) {
+            for (let property of config.properties) {
+                if (!property) continue;
+                let template = await this.templateManager.getUIElement(property.template);
+                let instance = $(template);
+
+                instance.find("label").html(property.title);
+
+                instance.find(".control").attr('id', property.name);
+                
+                let selectorElementAttr = await this.utils.getAttributes(el.find(property.selector));
+                let attr = this.utils.getElementInObjectArray('name', property.name, selectorElementAttr);
+                
+                
+                if (attr) instance.find(".control").val(attr.value);
+                
+                if (attr && property.template == "taggedinput") instance.find(".control").val(attr.value.split(" ").join(","));
+
+                this.templateManager.applyPlugins(instance.find(".control"), property.template);
+                
+                newFields.push(instance);
+            }
+            
+            if (config.styles) {
+                //console.log(config.styles);
+                for (let style of config.styles) {
+                    if (!style) continue;
+
+                    for(let rule of style.rules) {
+                        let template = await this.templateManager.getUIElement(rule.template);
+                        let instance = $(template);
+                        let ruleValue = el.find(style.selector).css(rule.name);
+                        instance.find("label").html(rule.title);
+                        instance.find(".control").attr('id', 'style');
+                        instance.find(".control").attr('modifies', rule.name);
+                        instance.find(".control").attr('selector', style.selector);
+                        instance.find(".control").val(ruleValue);
+                        
+                        if (ruleValue && rule.template == "taggedinput") instance.find(".control").val(ruleValue.split(" ").join(","));
+                        
+                        this.templateManager.applyPlugins(instance.find(".control"), rule.template);
+                        
+                        newFields.push(instance);
+                    }
+                    
+                    
+                
+                
+                }
+            }
+            
+        }
+        
+        return newFields;
+    }
+    
+    //Metodo encargado de sincronizar un elemento con el editor de elementos.
+    //Pide como parametro la instancia del elemento.
+    async syncWithElementEditor(el) {
+        
+        //Obtenemos los atributos del elemento pasado como parametro.
+        let attrs = await this.utils.getAttributes(el);
+        
+        //Variable donde se guardarán los nuevos fields
+        var newFields = [];
+        
+        let config = $(el).attr('custom-data');
+        
+        if (config) config = JSON.parse(config);
+        
+        //Agregamos los campos al editor de elementos
+        let fieldsElementEditor = await this.getFieldsElementEditor(el);
+        let fieldsConfigElementEditor = await this.getFieldsConfigElementEditor(config, el);
+        
+        newFields = newFields.concat(fieldsElementEditor);
+        newFields = newFields.concat(fieldsConfigElementEditor);
         
         $(this.elementEditorID).find('.form').html('');
         $(this.elementEditorID).find('.form').append(newFields);

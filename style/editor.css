@@ -1,0 +1,53 @@
+/** Editor Main Styles **/
+
+/*
+ *  STYLE 4
+ */
+
+.scrollbarStyled::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+.scrollbarStyled::-webkit-scrollbar
+{
+	width: 5px;
+	background-color: #F5F5F5;
+}
+
+.scrollbarStyled::-webkit-scrollbar-thumb
+{
+	background-color: #000000;
+	border: 1px solid #555555;
+}
+
+
+/**  UI Components CSS   **/
+
+/** Element Editor **/
+#elementEditor {
+    padding: 10px;
+    overflow-y: scroll;
+    height: 200px;
+}
+
+#elementEditor div {
+    display: block;
+}
+
+
+/** Editor Panel **/
+
+/** Menu **/
+
+.editorPanelMenu {
+    height: 100%;
+}
+.editorPanelMenu .item > div:first-child {
+    text-align: center;
+}
+
+
+/** handlers **/
+

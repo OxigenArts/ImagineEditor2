@@ -18,10 +18,23 @@ class EditorUI {
         //Se guarda una referencia al iframe del editor para poder editarla cuando una propiedad o elemento
         //sea cambiado/a.
         this.frame = frame;
-
+        
+        
+        //Variable editorID: Aquí se guarda el ID del elemento que contiene al editor
+        this.editorID = "#editor";
+        
         //Variable elementEditorID: Aquí se guarda el ID del editor de elementos.
         this.elementEditorID = "#elementEditor";
-
+        
+        
+        //Variable editorPanelIDSelector: Aquí se guarda el ID del panel del editor.
+        this.editorPanelSelector = ".editorPanel";
+        
+        
+        //Variable editorPanelMenuSelector: Aquí se guarda el ID del menu del panel del editor.
+        this.editorPanelMenuSelector = ".editorPanelMenu";
+        
+        
         //Se guarda una instancia de la clase Utils para posterior utilizacion.
         this.utils = new Utils();
 
@@ -38,14 +51,32 @@ class EditorUI {
     //de los componentes de la interfaz.
     initUI() {
         this.initElementEditorUI();
+        this.initEditorPanelUI();
+    }
+    
+    //Inicia el panel del editor
+    initEditorPanelUI() {
+        let editorPanelMenu = $(this.editorPanelMenuSelector);
+        let editorPanel = $(this.editorPanelSelector);
+        let editor = $(this.editorID);
+        
+        editorPanelMenu.each(function() {
+            Sortable.create(this, {
+                group: 'editor'
+            })
+        })
+        
+        
+        
     }
 
     //Inicializa el editor de elementos.
     initElementEditorUI() {
-        //Hace el editor de elementos movible por la pantalla y con la posibilidad de cambiar su tamaño.
-        $(this.elementEditorID).draggable();
-        $(this.elementEditorID).resizable();
-
+        
+        $(this.elementEditorID).resizable({
+            handles: 's'
+        })
+        
          //Campos del editor de elementos
          this.elementEditorFields = [
             {
@@ -177,6 +208,7 @@ class EditorUI {
         $(this.elementEditorID).find('.form').append(newFields);
 
         this.core.controls.fetchSelectionEvents();
+        this.initUI();
         //$(this.elementEditorID).html(elHtml);
     }
 }

@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/jquery-ui.theme.css">
     <link rel="stylesheet" href="style/bootstrap.min.css">
     <link rel="stylesheet" href="style/bootstrap-tagsinput.css">
+    <link rel="stylesheet" href="style/editor.css">
     
     <title>Imagine Editor</title>
 </head>
@@ -15,31 +17,10 @@
 <body>
     <div class="container-fluid">
         
-        <div id="elementEditor" class="modal">
-                    <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form">
-                                
-                            </div>    
-                        </div>
-                        <div class="modal-footer">
-                        
-                        
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="zip()">Generar Zip</button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-        <div class="row">
-            <div class="col-3 bg-dark text-light p-0 m-0">
-                <ul class="menu"> 
+        
+        <div class="row" id="editor">
+            <div editor-column class="col-3 bg-dark text-light p-0 m-0 editorPanel">
+                <ul class="menu editorPanelMenu"> 
                     <li class="item">
                         <div data-toggle="collapse" data-target="#componentsMenu">Componentes</div>
                         <ul id="componentsMenu" class="collapse">
@@ -48,10 +29,19 @@
                         </ul>
                     </li>
                     
+                    <li class="item">
+                       <div>Editor de elementos</div>
+                        <div id="elementEditor" class="scrollbarStyled">
+                                <div class="form">
+                                    
+                                </div>
+                        </div>
+                    </li>
+                    
 
                 </ul>
             </div>
-            <div class="col-9 p-0 m-0">
+            <div editor-column class="col-6 p-0 m-0">
                 <iframe class="border-0" id="editorFrame">
                 </iframe>
             </div>

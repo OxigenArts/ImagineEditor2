@@ -184,9 +184,20 @@ class FrameEditor {
         //Se hace el elemento a introducir un elemento Sortable, es decir, que puede ser intercambiado entre los
         //otros elementos dentro del body.
         //Nota: Nótese que también se le agrega el parámetro group:elements.
+        
+        
+        
+        
         Sortable.create(el[0], {
             group:'elements'
         });
+        
+        el.children().each(function (){
+            Sortable.create(this, {
+                group: 'elements'
+            });
+        })
+        
 
         //Se agrega el elemento creado en la línea 177 al body.
         body.append(el);
